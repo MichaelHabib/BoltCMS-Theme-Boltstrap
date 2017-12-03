@@ -1,0 +1,17 @@
+{#{% extends 'partials/_master.twig' %}#}
+
+{% block main %}
+    {% if record is defined %}
+        <h1>{{ record.title }}</h1>
+
+        {{ record.teaser }}
+
+        {% if record.image is defined %}
+            <img src="{{ image(record.image) }}" class="img-fluid" />
+        {% endif %}
+
+        {{ record.body }}
+
+        {% include 'partials/_recordfooter.twig' with {'record': record} %}
+    {% endif %}
+{% endblock %}

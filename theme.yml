@@ -1,0 +1,51 @@
+homepage: page/home
+
+
+## Templating COnfig
+template_directory: templates/
+homepage_template: index.twig
+record_template: record.twig
+listing_template: listing.twig
+search_results_template: listing.twig
+maintenance_template: maintenance.twig
+notfound: 404.twig
+
+## Layout Config
+#Widths are defined in terms of Bootstrap's grid system.
+#USAGE:
+#layout:
+#    [default, contenttypeslug, contententtypeslug_contenetslug]:
+#        main:
+#        width: [0-12]
+#    aside:
+#        width: [0-12]
+#        align: [left,right]
+layout:
+  defaults:
+    main:
+        width: 9
+    aside:
+        width: 3
+  page:
+    main:
+        width: 9
+    aside:
+        width: 3
+  page_home:
+    main:
+        width: 6
+    aside:
+        width: 6
+    
+    
+## Debug Config
+dump:
+    records: true
+    app:
+#        config: true
+    home:
+        main_width: 9
+        aside_width: 3
+
+
+

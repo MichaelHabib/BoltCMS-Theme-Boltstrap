@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'includes/_master_head.twig' %}
+        <title>
+            {% block title %}
+                {% if record.title is defined %}
+                    {{ record.title|striptags }} |
+                {% endif %}
+                {{ app.config.get('general/sitename') }}  
+                {% if record.title is not defined %}
+                    | {{ app.config.get('general/payoff') }}
+                {% endif %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {% if theme.layout is defined %}
+            {% set record_type_slug = record.contenttype.singular_slug %}
+            {#            {% if attribute(theme.layout,record_type_slug~'_'~record.slug) is defined %}#}
+            {% if theme.layout[record_type_slug~'_'~record.slug] is defined %}
+                {% set main_width = theme.layout[record_type_slug~'_'~record.slug].main.width %}
+                {% set aside_width = theme.layout[record_type_slug~'_'~record.slug].aside.width  %}
+            {% elseif theme.layout[record_type_slug] is defined %}
+                {% set main_width = theme.layout[record_type_slug].main.width %}
+                {% set aside_width = theme.layout[record_type_slug].aside.width  %}
+            {% else %}
+                {% set main_width = 7%}
+                {% set aside_width = 5 %}
+            {% endif %}
+
+            {#            {% set recordslug = record.slug %}#}
+            {#            {{ dump(record.contenttype.singular_slug) }}#}
+            {#            {{ dump(attribute(theme.layout,record_type_slug~"_"~record.slug) ) }}#}
+        {% endif %}
+
+        {% include 'includes/_master_header.twig' %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-{{ main_width }}">
+                    {% block main %}
+                        {% if record is defined %}
+                            {{ fields(record=record, template='includes/_fields.twig') }}
+                            {% include 'includes/_record_footer.twig' with {'record': record} %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
+                {% if aside_width is defined and aside_width  != 0%}
+                    <div class="col-md-{{ aside_width }}">
+                        {% include 'includes/_aside.twig' %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% include 'includes/_master_footer.twig' %}
+
+        {% if theme.dump.records is defined  %} 
+            {{ dump(record) }}
+        {% endif %}
+        {% if theme.dump.app.config is defined  %} 
+            {{ dump(app.config.get('general')) }}
+        {% endif %}
+
+    </body>
+</html>

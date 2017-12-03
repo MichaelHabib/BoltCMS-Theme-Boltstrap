@@ -1,0 +1,13 @@
+{
+    "name": "boltcms-theme-bootstrap4",
+    "description": "ERROR: No README data found!",
+    "main": "Gruntfile.js",
+    "license": "ISC",
+    "homepage": "",
+    "ignore": [
+        "**/.*", "node_modules", "bower_components", "test", "tests"
+    ],
+    "dependencies": {
+        "jquery": "^3.2.1"
+    }
+}  

@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01/12/2017, 12:16:16 PM
+    Author     : michael
+*/
+/*@import "../../bower_components/bootstrap/scss/bootstrap.scss";*/
+/*@import "node_modules/bootstrap/scss/variables";*/
+/*
+General CSS
+*/
+.card-img-top img,
+img.card-img-top {
+  max-width: 100%; }
+
+/* card-columns */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .card-columns {
+    column-count: 2; } }
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 3; } }
+
+.record-footer {
+  /*@include has-shadow;*/
+  /*@include has-border;*/ }
+
+/*# sourceMappingURL=bootstrap.css.map */

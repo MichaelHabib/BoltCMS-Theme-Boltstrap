@@ -1,0 +1,21 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="{{ path('homepage') }}">{{ app.config.get('general/sitename') }}</a>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            {{ menu(template='partials/_sub_menu.twig') }}
+
+            <form method="get" action="{{ path('search') }}" class="form-inline">
+                <input type="text" name="search" class="form-control" placeholder="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<h1 class="text-center">{{ app.config.get('general/sitename') }}</h1>
+<h3 class="text-center">{{ app.config.get('general/payoff') }}</h3>

@@ -1,0 +1,14 @@
+{% extends '/_master.twig' %}
+{% block main %}
+    <div class="card-columns">
+        {% for record in records %}
+            {% include 'includes/_listing_item.twig' with {'record': record} %}
+            {% if not loop.last %}
+                {#            <hr />#}
+            {% endif %}
+        {% else %}
+            <h2>{{ __('general.phrase.no-content-found') }}</h2>
+            <p>Unfortunately, no content could be found.</p>
+        {% endfor %}
+    </div>
+{% endblock main %}  

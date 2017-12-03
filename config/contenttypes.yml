@@ -1,0 +1,25 @@
+
+
+#############
+news:
+    name: News from Theme
+    singular_name: News Item
+    fields:
+        title:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: title
+        image:
+            type: image
+        text:
+            type: html
+            height: 300px
+    record_template: newsitem.twig
+    recordsperpage: 20    
+    show_on_dashboard: true
+    default_status: published
+    searchable: true
+    
+    

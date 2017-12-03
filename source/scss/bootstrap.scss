@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01/12/2017, 12:16:16 PM
+    Author     : michael
+*/
+$bootstrap: 'node_modules/bootstrap/scss';
+/*@import "../../bower_components/bootstrap/scss/bootstrap.scss";*/
+// Required
+@import "node_modules/bootstrap/scss/functions";
+/*@import "node_modules/bootstrap/scss/variables";*/
+@import "_variables.scss";
+@import "node_modules/bootstrap/scss/mixins";
+ 
+/*
+General CSS
+*/
+@mixin has-shadow{
+    box-shadow: 0 0 2px 1px $gray-lighter;    
+}
+@mixin has-border{
+    border: 1px solid $gray-lightest;
+
+}
+.card-img-top img,
+img.card-img-top{
+    max-width: 100%;
+}
+
+/* card-columns */
+.card-columns {
+    @include media-breakpoint-only(lg) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(xl) {
+        column-count: 3;
+    }
+}
+
+
+.record-footer{
+    /*@include has-shadow;*/
+    /*@include has-border;*/
+
+}

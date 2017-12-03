@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 e300e364113f2bba4902bb51851977d4d657ddf4 bitnami <bitnami@server1.com> 1512098648 +0000	commit (initial): ok
+e300e364113f2bba4902bb51851977d4d657ddf4 0e03a6ca42b47adc680fd907082ff491f30ec36c bitnami <bitnami@server1.com> 1512099649 +0000	pull origin master --allow-unrelated-histories: Merge made by the 'recursive' strategy.
