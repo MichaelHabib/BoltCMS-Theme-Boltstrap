@@ -16,17 +16,16 @@
     </head>
     <body>
         {% if theme.layout is defined %}
-            {% set record_type_slug = record.contenttype.singular_slug %}
-            {#            {% if attribute(theme.layout,record_type_slug~'_'~record.slug) is defined %}#}
-            {% if theme.layout[record_type_slug~'_'~record.slug] is defined %}
-                {% set main_width = theme.layout[record_type_slug~'_'~record.slug].main.width %}
-                {% set aside_width = theme.layout[record_type_slug~'_'~record.slug].aside.width  %}
-            {% elseif theme.layout[record_type_slug] is defined %}
-                {% set main_width = theme.layout[record_type_slug].main.width %}
-                {% set aside_width = theme.layout[record_type_slug].aside.width  %}
+            {% set contenttypeslug = app.request.get('contenttypeslug') %}
+            {% if record is defined and theme.layout[contenttypeslug~'_'~record.slug] is defined %}
+                {% set main_width = theme.layout[contenttypeslug~'_'~record.slug].main.width %}
+                {% set aside_width = theme.layout[contenttypeslug~'_'~record.slug].aside.width  %}
+            {% elseif theme.layout[contenttypeslug] is defined %}
+                {% set main_width = theme.layout[contenttypeslug].main.width %}
+                {% set aside_width = theme.layout[contenttypeslug].aside.width  %}
             {% else %}
-                {% set main_width = 7%}
-                {% set aside_width = 5 %}
+                {% set main_width = theme.layout['defaults'].main.width %}
+                {% set aside_width = theme.layout['defaults'].aside.width  %}
             {% endif %}
 
             {#            {% set recordslug = record.slug %}#}
@@ -36,19 +35,34 @@
 
         {% include 'includes/_master_header.twig' %}
 
-        <div class="container">
-            <div class="row">
+        <div class="container page-wrapper">
+            <div class="row page-layout-row">
                 <div class="col-md-{{ main_width }}">
                     {% block main %}
                         {% if record is defined %}
-                            {{ fields(record=record, template='includes/_fields.twig') }}
-                            {% include 'includes/_record_footer.twig' with {'record': record} %}
+                            <article> 
+                                {{ fields(record=record, template='includes/_sub_fields.twig') }}
+                                {% include 'includes/_record_footer.twig' with {'record': record} %}
+                            </article>
+
+                        {% elseif records is defined %}
+                            {% for record in records %}
+                                {% include 'includes/_listing_item.twig' with {'record': record} %}
+                                {% if not loop.last %}
+                                    <hr />
+                                {% endif %}
+                            {% else %}
+                                <h2>{{ __('general.phrase.no-content-found') }}</h2>
+                                <p>Unfortunately, no content could be found.</p>
+                            {% endfor %}
+
                         {% endif %}
                     {% endblock %}
                 </div>
 
                 {% if aside_width is defined and aside_width  != 0%}
                     <div class="col-md-{{ aside_width }}">
+
                         {% include 'includes/_aside.twig' %}
                     </div>
                 {% endif %}
@@ -57,11 +71,17 @@
 
         {% include 'includes/_master_footer.twig' %}
 
-        {% if theme.dump.records is defined  %} 
+
+        {% if record is defined and theme.dump.record.all is defined  %} 
+            <h2>dump(record)</h2>
             {{ dump(record) }}
         {% endif %}
-        {% if theme.dump.app.config is defined  %} 
-            {{ dump(app.config.get('general')) }}
+        {% if theme.dump.app.all is defined  %} 
+            <h2>dump(app.config)) </h2>
+            {{ dump(app.config) }}
+        {% elseif theme.dump.app.config is defined  %}
+            <h2>dump(app.config)) </h2>
+            {{ dump(app.config) }}
         {% endif %}
 
     </body>

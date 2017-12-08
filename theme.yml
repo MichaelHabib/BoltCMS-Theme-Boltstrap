@@ -40,12 +40,11 @@ layout:
     
 ## Debug Config
 dump:
-    records: true
+    record: 
+#        all: true
     app:
+#        all: true
 #        config: true
-    home:
-        main_width: 9
-        aside_width: 3
 
 
 

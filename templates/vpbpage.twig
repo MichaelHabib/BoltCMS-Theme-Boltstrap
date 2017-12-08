@@ -1,0 +1,58 @@
+{% extends '/_master.twig' %}
+{% block main %}
+    {#    {{ parent() }}#}
+    <div class="container-fluid sections-wrapper">
+        {% set sections = ['contentblocks','section_a','section_b'] %}
+
+        {% for sectionname in sections %}
+            {% if record[sectionname] is defined %} 
+                <section class="{{ sectionname~"_section" }} row" >
+
+                    {% for group in record[sectionname] %}
+                        {{ dump("section name:"~sectionname~" block name : "~group.block) }}
+                        <div class="{{ group.block ~ "_block" }} col-sm-12">
+
+
+                            {% if group.block == 'sectionsetting' %}
+                            
+                            {% elseif group.block == 'blurb' %}
+                                {% setcontent blurblink = record.somevalue returnsingle %}
+                                <div class="card">
+                                    <a href="{{ blurblink }}" class="card-img-top">
+                                        <img class=""  src="{{ group.image | image(480,320 )}}" />
+                                    </a>
+
+                                    <div class="card-body">
+                                        <h2 class="card-title"><a href="">{{ group.title }}</a></h2>
+
+                                        <div class="card-text">{{ group.content |raw }}</div>
+
+                                    </div>
+                                </div>
+
+                            {% elseif group.block == 'gallery' %}
+                                <h2>{{ group.title }}</h2>
+                                <div class="card-columns">
+                                    {% for image in group.images %}
+                                        <div class="card">
+                                            <a href="{{ blurblink }}" class="card-img-top">
+                                                <img class=""  src="{{ image | image(480,320 )}}" />
+                                            </a>
+                                            <div class="card-body">
+                                                <h2 class="card-title"><a href="">{{ image.title }}</a></h2>
+                                            </div>
+                                        </div>
+                                        {#                                    {{ image|popup(200,200) }}#}
+                                        {#                                {{ group.description }}#}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+
+                        </div> <!-- end {{ group.block ~ "_block" }} -->
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock main %}
